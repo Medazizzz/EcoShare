@@ -1,0 +1,29 @@
+/* Simple modern CSS used by the two templates (responsive, utility-ish) */
+:root{--accent:#1fa67a;--muted:#6b7280;--bg:#0f172a}
+*{box-sizing:border-box}
+body{font-family:Inter,system-ui,Segoe UI,Roboto,'Helvetica Neue',Arial;margin:0;background:#f7fafc;color:#0f172a}
+.container{max-width:1100px;margin:0 auto;padding:2rem}
+
+/* Hero */
+.hero{display:flex;gap:2rem;align-items:center;padding:4rem 0}
+.hero .left{flex:1}
+.hero h1{font-size:2.25rem;margin:0 0 .5rem}
+.hero p{color:var(--muted);margin:0 0 1.25rem}
+.btn{display:inline-block;padding:.7rem 1rem;border-radius:.6rem;background:var(--accent);color:white;text-decoration:none}
+
+/* Features */
+.features{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1rem;margin-top:2rem}
+.card{background:white;border-radius:.75rem;padding:1rem;box-shadow:0 6px 18px rgba(15,23,42,0.06)}
+
+/* Dashboard */
+.layout{display:flex;min-height:80vh}
+.sidebar{width:220px;background:#0f172a;color:white;padding:1rem}
+.main{flex:1;padding:1.25rem}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1rem}
+.kpi{background:white;padding:1rem;border-radius:.6rem}
+
+/* Responsive */
+@media (max-width:720px){
+  .hero{flex-direction:column}
+  .sidebar{display:none}
+}

@@ -1,0 +1,8 @@
+# config/routes.yaml
+home:
+  path: /
+  controller: App\\Controller\\HomeController::home
+
+dashboard:
+  path: /dashboard
+  controller: App\\Controller\\HomeController::dashboard

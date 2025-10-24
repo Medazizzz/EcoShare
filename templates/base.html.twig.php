@@ -1,0 +1,38 @@
+<?php
+// very small PHP base template used for local preview without Twig
+if (!isset($title)) $title = 'EcoShare';
+ob_start();
+?>
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title><?php echo htmlspecialchars($title); ?></title>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  <header style="background:white;padding:.5rem 0;box-shadow:0 2px 8px rgba(15,23,42,0.04)">
+    <div class="container" style="display:flex;justify-content:space-between;align-items:center">
+      <a href="/" style="text-decoration:none;color:var(--accent);font-weight:700">EcoShare</a>
+      <nav>
+        <a href="/" style="margin-right:1rem;text-decoration:none;color:var(--muted)">Accueil</a>
+        <a href="/dashboard" style="text-decoration:none;color:var(--muted)">Dashboard</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <div class="container">
+      <?php echo $content; ?>
+    </div>
+  </main>
+
+  <footer style="padding:2rem 0;text-align:center;color:var(--muted)">
+    © <?php echo date('Y'); ?> EcoShare — Partagez pour préserver
+  </footer>
+</body>
+</html>
+<?php
+echo ob_get_clean();
+?>
