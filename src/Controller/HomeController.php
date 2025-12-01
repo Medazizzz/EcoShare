@@ -1,4 +1,5 @@
 <?php
+<<<<<<< HEAD
 
 namespace App\Controller;
 
@@ -46,5 +47,31 @@ class HomeController extends AbstractController
         return $this->render('user/home.html.twig', [
             'evenements' => $evenements,
         ]);
+=======
+// src/Controller/HomeController.php
+namespace App\\Controller;
+
+use Symfony\\Bundle\\FrameworkBundle\\Controller\\AbstractController;
+use Symfony\\Component\\HttpFoundation\\Response;
+use Symfony\\Component\\Routing\\Annotation\\Route;
+
+class HomeController extends AbstractController
+{
+    /**
+     * @Route("/", name="home")
+     */
+    public function home(): Response
+    {
+        // in a full Symfony app you would return \$this->render('home.html.twig');
+        return new Response(file_get_contents(__DIR__.'/../../templates/home.html.twig.php'));
+    }
+
+    /**
+     * @Route("/dashboard", name="dashboard")
+     */
+    public function dashboard(): Response
+    {
+        return new Response(file_get_contents(__DIR__.'/../../templates/dashboard.html.twig.php'));
+>>>>>>> 5596efc5a61a34dda8dc95036c6f56b1b0cfd685
     }
 }

@@ -1,5 +1,16 @@
+<<<<<<< HEAD
 controllers:
     resource:
         path: ../src/Controller/
         namespace: App\Controller
     type: attribute
+=======
+# config/routes.yaml
+home:
+  path: /
+  controller: App\\Controller\\HomeController::home
+
+dashboard:
+  path: /dashboard
+  controller: App\\Controller\\HomeController::dashboard
+>>>>>>> 5596efc5a61a34dda8dc95036c6f56b1b0cfd685
