@@ -1,0 +1,69 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Evenement index{% endblock %}
+
+{% block body %}
+    <h1>Evenement index</h1>
+
+    <table class="data-table">
+        <thead>
+            <tr>
+                <th>Titre</th>
+                <th>Description</th>
+                <th>DateEvent</th>
+                <th>Lieu</th>
+                <th>Ville</th>
+                <th>Type</th>
+                <th>Image</th>
+                <th>Organisateur</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for evenement in evenements %}
+            <tr>
+                <td>{{ evenement.titre }}</td>
+                <td>{{ evenement.description }}</td>
+                <td>{{ evenement.dateEvent ? evenement.dateEvent|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ evenement.lieu }}</td>
+                <td>{{ evenement.ville }}</td>
+                <td>{{ evenement.type ? evenement.type.value : '' }}</td>
+                <td>
+                    {% set placeholder = asset('images/placeholder.svg') %}
+                    {% if evenement.image %}
+                        {% set raw = evenement.image %}
+                        {% if raw starts with('http') or raw starts with('https') %}
+                            {% set imgSrc = raw %}
+                        {% elseif raw matches('/\\//') %}
+                            {# contains a slash -> treat as relative path under public/ #}
+                            {% set imgSrc = asset(raw) %}
+                        {% else %}
+                            {# bare filename -> assume uploads/events/ #}
+                            {% set imgSrc = asset('uploads/events/' ~ raw) %}
+                        {% endif %}
+                        <img src="{{ imgSrc }}" alt="{{ evenement.titre }}" class="table-thumb" onerror="this.onerror=null;this.src='{{ placeholder }}'">
+                    {% else %}
+                        <img src="{{ placeholder }}" alt="placeholder" class="table-thumb">
+                    {% endif %}
+                </td>
+                <td>{{ evenement.organisateurNom }} {{ evenement.organisateurPrenom }}</td>
+                <td>
+                    <div class="action-buttons">
+                        <a class="btn btn-sm btn-outline" href="{{ path('app_evenement_edit', {'id': evenement.id}) }}">Modifier</a>
+                        <form method="post" action="{{ path('app_evenement_delete', {'id': evenement.id}) }}" style="margin:0;" onsubmit="return confirm('Voulez-vous supprimer cet événement ?');">
+                            <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ evenement.id) }}">
+                            <button class="btn btn-sm btn-danger" type="submit">Supprimer</button>
+                        </form>
+                    </div>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="9">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a class="btn" href="{{ path('app_evenement_new') }}">Créer un événement</a>
+{% endblock %}

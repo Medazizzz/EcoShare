@@ -1,0 +1,48 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Sponsors & Partenaires{% endblock %}
+
+{% block body %}
+<h1>Sponsors &amp; partenaires</h1>
+
+<div style="margin:.75rem 0; display:flex; gap:.5rem;">
+    <a class="btn" href="{{ path('dashboard') }}">Dashboard</a>
+    <a class="btn btn-outline" href="{{ path('app_sponsor_partenaire_new') }}">Ajouter</a>
+</div>
+
+<table class="data-table">
+    <thead>
+        <tr>
+            <th>Nom</th>
+            <th>Type</th>
+            <th>Logo</th>
+            <th>Lien</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for sponsor in sponsors %}
+        <tr>
+            <td>{{ sponsor.nom }}</td>
+            <td>{{ sponsor.type }}</td>
+            <td>{{ sponsor.logo }}</td>
+            <td>
+                {% if sponsor.lien %}
+                    <a href="{{ sponsor.lien }}" target="_blank">Voir</a>
+                {% endif %}
+            </td>
+            <td class="actions">
+                <a class="btn btn-small" href="{{ path('app_sponsor_partenaire_show', {'id': sponsor.id}) }}">Consulter</a>
+                <a class="btn btn-outline btn-small" href="{{ path('app_sponsor_partenaire_edit', {'id': sponsor.id}) }}">Modifier</a>
+                <form method="post" action="{{ path('app_sponsor_partenaire_delete', {'id': sponsor.id}) }}" style="display:inline" onsubmit="return confirm('Supprimer ?');">
+                    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ sponsor.id) }}">
+                    <button class="btn btn-danger btn-small">Supprimer</button>
+                </form>
+            </td>
+        </tr>
+    {% else %}
+        <tr><td colspan="5">Aucun sponsor ou partenaire.</td></tr>
+    {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

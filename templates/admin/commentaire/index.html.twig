@@ -1,0 +1,45 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Commentaire index{% endblock %}
+
+{% block body %}
+    <h1>Commentaire index</h1>
+
+    <div style="margin:0.75rem 0; display:flex; gap:0.5rem; align-items:center;">
+        <a class="btn btn-outline" href="{{ path('dashboard') }}">Dashboard</a>
+    </div>
+    <table class="data-table">
+        <thead>
+            <tr>
+                <th>Contenu</th>
+                <th>DateCreation</th>
+                <th>Événement</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for commentaire in commentaires %}
+            <tr>
+                <td>{{ commentaire.contenu }}</td>
+                <td>{{ commentaire.dateCreation ? commentaire.dateCreation|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ commentaire.evenement ? commentaire.evenement.titre : '&mdash;' }}</td>
+                <td class="actions">
+                    <div class="action-buttons">
+                        <a class="btn btn-sm btn-outline" href="{{ path('app_commentaire_edit', {'id': commentaire.id}) }}">Modifier</a>
+                        <form method="post" action="{{ path('app_commentaire_delete', {'id': commentaire.id}) }}" style="margin:0;" onsubmit="return confirm('Voulez-vous supprimer ce commentaire ?');">
+                            <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ commentaire.id) }}">
+                            <button class="btn btn-sm btn-danger" type="submit">Supprimer</button>
+                        </form>
+                    </div>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a class="btn" href="{{ path('app_commentaire_new') }}">Créer un commentaire</a>
+{% endblock %}

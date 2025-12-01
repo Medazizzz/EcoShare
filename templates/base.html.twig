@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>{% block title %}{{ title|default('EcoShare') }}{% endblock %}</title>
+  {% block stylesheets %}
+    <link rel="stylesheet" href="/css/style.css">
+  {% endblock %}
+</head>
+<body>
+  <header style="background:white;padding:.5rem 0;box-shadow:0 2px 8px rgba(15,23,42,0.04)">
+    <div class="container" style="display:flex;justify-content:space-between;align-items:center">
+      <a href="/" style="text-decoration:none;color:var(--accent);font-weight:700">EcoShare</a>
+      <nav>
+        <a href="/" style="margin-right:1rem;text-decoration:none;color:var(--muted)">Accueil</a>
+        <a href="/dashboard" style="margin-right:1rem;text-decoration:none;color:var(--muted)">Dashboard</a>
+        <a href="/evenement" style="margin-right:1rem;text-decoration:none;color:var(--muted)">Evenement</a>
+        <a href="/commentaire" style="text-decoration:none;color:var(--muted)">Commentaire</a>
+      </nav>
+    </div>
+  </header>
+  <main>
+    <div class="container">
+      {% block body %}
+        {% if content is defined %}
+          {{ content|raw }}
+        {% endif %}
+      {% endblock %}
+    </div>
+  </main>
+
+  <footer style="padding:2rem 0;text-align:center;color:var(--muted)">
+    © {{ "now"|date('Y') }} EcoShare — Partagez pour préserver
+  </footer>
+  {% block javascripts %}
+    <script src="/js/main.js" defer></script>
+  {% endblock %}
+</body>
+</html>

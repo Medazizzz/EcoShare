@@ -1,0 +1,20 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Sponsor / Partenaire{% endblock %}
+
+{% block body %}
+<h1>{{ sponsor.id ? 'Modifier' : 'Nouveau' }} sponsor / partenaire</h1>
+
+<div style="margin:.75rem 0;">
+    <a class="btn btn-outline" href="{{ path('app_sponsor_partenaire_index') }}">Retour à la liste</a>
+</div>
+
+{{ form_start(form) }}
+    {{ form_row(form.nom) }}
+    {{ form_row(form.logo) }}
+    {{ form_row(form.description) }}
+    {{ form_row(form.type) }}
+    {{ form_row(form.lien) }}
+    <button class="btn">{{ sponsor.id ? 'Mettre à jour' : 'Créer' }}</button>
+{{ form_end(form) }}
+{% endblock %}

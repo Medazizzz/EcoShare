@@ -1,0 +1,25 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Fiche publicité{% endblock %}
+
+{% block body %}
+<h1>Publicité</h1>
+
+<p><strong>Image&nbsp;:</strong> {{ publicite.image }}</p>
+<p><strong>Description&nbsp;:</strong> {{ publicite.description }}</p>
+<p><strong>Lien&nbsp;:</strong>
+    {% if publicite.lien %}
+        <a href="{{ publicite.lien }}" target="_blank">{{ publicite.lien }}</a>
+    {% else %}
+        -
+    {% endif %}
+</p>
+<p><strong>Sponsor/partenaire&nbsp;:</strong>
+    {{ publicite.sponsorPartenaire ? publicite.sponsorPartenaire.nom : 'Générale' }}
+</p>
+
+<div style="margin-top:1rem;">
+    <a class="btn btn-outline" href="{{ path('app_publicite_index') }}">Retour</a>
+    <a class="btn" href="{{ path('app_publicite_edit', {'id': publicite.id}) }}">Modifier</a>
+</div>
+{% endblock %}

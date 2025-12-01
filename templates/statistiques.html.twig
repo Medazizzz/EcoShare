@@ -1,0 +1,54 @@
+<?php
+$title = 'EcoShare — Statistiques';
+ob_start(); ?>
+<div class="layout">
+  <?php include __DIR__.'/sidebar.php'; ?>
+  <section class="main">
+    <div class="container">
+      <h2>Statistiques</h2>
+      <p class="subtitle">Analysez les données de votre communauté</p>
+      
+      <div class="grid" style="margin-top: 2rem;">
+        <div class="kpi">
+          <h4>Événements ce mois</h4>
+          <p>12</p>
+        </div>
+        <div class="kpi">
+          <h4>Membres actifs</h4>
+          <p>289</p>
+        </div>
+        <div class="kpi">
+          <h4>Objets partagés</h4>
+          <p>76</p>
+        </div>
+        <div class="kpi">
+          <h4>Impact environnemental</h4>
+          <p>1,234 kg CO₂</p>
+        </div>
+      </div>
+      
+      <div class="power-card" style="margin-top: 2rem;">
+        <h3>Évolution des événements</h3>
+        <div class="chart-container" style="height: 250px;">
+          <div class="chart-bar" style="height: 40%;"></div>
+          <div class="chart-bar" style="height: 60%;"></div>
+          <div class="chart-bar" style="height: 50%;"></div>
+          <div class="chart-bar" style="height: 70%;"></div>
+          <div class="chart-bar" style="height: 65%;"></div>
+          <div class="chart-bar" style="height: 85%; background: linear-gradient(180deg, #8b5cf6 0%, #7c3aed 100%);"></div>
+        </div>
+        <div class="chart-labels">
+          <span>Jan</span>
+          <span>Fév</span>
+          <span>Mar</span>
+          <span>Avr</span>
+          <span>Mai</span>
+          <span>Juin</span>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+<?php $content = ob_get_clean(); include __DIR__.'/base.html.twig.php';
+?>
+

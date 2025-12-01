@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit Commentaire{% endblock %}
+
+{% block body %}
+        <div class="card" style="padding:1.25rem">
+            <h1 style="margin-top:0">Modifier le commentaire</h1>
+            <p style="color:var(--muted);margin-top:0.25rem">Modifiez le contenu ou la date du commentaire si nécessaire.</p>
+
+            {{ include('commentaire/_form.html.twig', {'button_label': 'Mettre à jour'}) }}
+
+            <div style="margin-top:0.75rem;display:flex;gap:.5rem;align-items:center">
+                <a href="{{ path('app_commentaire_index') }}" class="btn btn-outline">Retour à la liste</a>
+                {{ include('commentaire/_delete_form.html.twig') }}
+            </div>
+        </div>
+{% endblock %}

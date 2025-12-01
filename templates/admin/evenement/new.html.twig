@@ -1,0 +1,12 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Evenement{% endblock %}
+
+{% block body %}
+        <div class="card" style="padding:1.25rem">
+            <h1 style="margin-top:0">Créer un événement</h1>
+            <p style="color:var(--muted);margin-top:0.25rem">Remplissez les informations ci-dessous pour planifier un nouvel événement.</p>
+
+            {{ include('evenement/_form.html.twig', { 'show_back': false }) }}
+        </div>
+{% endblock %}

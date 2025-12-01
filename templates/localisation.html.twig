@@ -1,0 +1,42 @@
+<?php
+$title = 'EcoShare — Localisation';
+ob_start(); ?>
+<div class="layout">
+  <?php include __DIR__.'/sidebar.php'; ?>
+  <section class="main">
+    <div class="container">
+      <h2>Localisation</h2>
+      <p class="subtitle">Trouvez des événements et outils près de chez vous</p>
+      
+      <div class="card" style="margin-top: 2rem;">
+        <h3>Carte interactive</h3>
+        <div style="background: var(--bg); border-radius: 0.75rem; padding: 3rem; text-align: center; margin-top: 1rem;">
+          <div style="font-size: 4rem; margin-bottom: 1rem;">🗺️</div>
+          <p class="muted">Carte interactive des événements et outils disponibles</p>
+          <p style="margin-top: 1rem; color: var(--muted);">Activez la géolocalisation pour voir les événements près de vous</p>
+        </div>
+      </div>
+      
+      <div class="grid" style="margin-top: 2rem;">
+        <div class="card">
+          <h3>📍 Paris</h3>
+          <p>12 événements disponibles</p>
+          <p class="muted">45 outils partagés</p>
+        </div>
+        <div class="card">
+          <h3>📍 Lyon</h3>
+          <p>8 événements disponibles</p>
+          <p class="muted">28 outils partagés</p>
+        </div>
+        <div class="card">
+          <h3>📍 Marseille</h3>
+          <p>15 événements disponibles</p>
+          <p class="muted">52 outils partagés</p>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+<?php $content = ob_get_clean(); include __DIR__.'/base.html.twig.php';
+?>
+

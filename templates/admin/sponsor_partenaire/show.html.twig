@@ -1,0 +1,32 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Fiche sponsor / partenaire{% endblock %}
+
+{% block body %}
+<h1>{{ sponsor.nom }}</h1>
+
+<p><strong>Type&nbsp;:</strong> {{ sponsor.type }}</p>
+<p><strong>Logo&nbsp;:</strong> {{ sponsor.logo }}</p>
+<p><strong>Description&nbsp;:</strong> {{ sponsor.description }}</p>
+<p><strong>Lien&nbsp;:</strong>
+    {% if sponsor.lien %}
+        <a href="{{ sponsor.lien }}" target="_blank">{{ sponsor.lien }}</a>
+    {% else %}
+        -
+    {% endif %}
+</p>
+
+<h2>Publicités associées</h2>
+<ul>
+    {% for pub in sponsor.publicites %}
+        <li>{{ pub.description ?? 'Publicité' }} ({{ pub.image }})</li>
+    {% else %}
+        <li>Aucune publicité associée.</li>
+    {% endfor %}
+</ul>
+
+<div style="margin-top:1rem;">
+    <a class="btn btn-outline" href="{{ path('app_sponsor_partenaire_index') }}">Retour</a>
+    <a class="btn" href="{{ path('app_sponsor_partenaire_edit', {'id': sponsor.id}) }}">Modifier</a>
+</div>
+{% endblock %}

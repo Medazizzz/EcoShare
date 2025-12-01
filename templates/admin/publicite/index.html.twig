@@ -1,0 +1,48 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Publicités{% endblock %}
+
+{% block body %}
+<h1>Publicités</h1>
+
+<div style="margin:.75rem 0; display:flex; gap:.5rem;">
+    <a class="btn" href="{{ path('dashboard') }}">Dashboard</a>
+    <a class="btn btn-outline" href="{{ path('app_publicite_new') }}">Ajouter</a>
+</div>
+
+<table class="data-table">
+    <thead>
+        <tr>
+            <th>Image</th>
+            <th>Description</th>
+            <th>Lien</th>
+            <th>Sponsor / Partenaire</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for publicite in publicites %}
+        <tr>
+            <td>{{ publicite.image }}</td>
+            <td>{{ publicite.description }}</td>
+            <td>
+                {% if publicite.lien %}
+                    <a href="{{ publicite.lien }}" target="_blank">Voir</a>
+                {% endif %}
+            </td>
+            <td>{{ publicite.sponsorPartenaire ? publicite.sponsorPartenaire.nom : 'Générale' }}</td>
+            <td class="actions">
+                <a class="btn btn-small" href="{{ path('app_publicite_show', {'id': publicite.id}) }}">Consulter</a>
+                <a class="btn btn-outline btn-small" href="{{ path('app_publicite_edit', {'id': publicite.id}) }}">Modifier</a>
+                <form method="post" action="{{ path('app_publicite_delete', {'id': publicite.id}) }}" style="display:inline" onsubmit="return confirm('Supprimer ?');">
+                    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ publicite.id) }}">
+                    <button class="btn btn-danger btn-small">Supprimer</button>
+                </form>
+            </td>
+        </tr>
+    {% else %}
+        <tr><td colspan="5">Aucune publicité.</td></tr>
+    {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

@@ -1,0 +1,29 @@
+{# templates/home.html.twig #}
+{% set title = 'EcoShare — Partage et actions écologiques' %}
+{% set content %}
+<section class="hero">
+  <div class="left">
+    <h1>Bienvenue sur EcoShare</h1>
+    <p>Partagez, organisez et participez à des actions locales pour un environnement durable. Une plateforme simple pour créer de l'impact.</p>
+    <a class="btn" href="/dashboard">Commencer</a>
+    <div class="features">
+      <div class="card">
+        <h3>Événements locaux</h3>
+        <p class="muted">Créez et rejoignez des événements près de chez vous.</p>
+      </div>
+      <div class="card">
+        <h3>Partage d'outils</h3>
+        <p class="muted">Empruntez ou prêtez des outils à la communauté.</p>
+      </div>
+      <div class="card">
+        <h3>Suivi d'impact</h3>
+        <p class="muted">Mesurez l'impact de vos actions collectives.</p>
+      </div>
+    </div>
+  </div>
+  <div class="right">
+    <img alt="EcoShare illustration" src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='420' height='280'><rect rx='16' width='100%' height='100%' fill='%231fe0a0'/><text x='50%' y='50%' dominant-baseline='middle' text-anchor='middle' font-size='20' fill='white'>EcoShare</text></svg>" style="max-width:420px;width:100%;border-radius:12px;">
+  </div>
+</section>
+{% endset %}
+{% include 'base.html.twig' with {'content': content, 'title': title} %}

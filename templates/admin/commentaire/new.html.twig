@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Commentaire{% endblock %}
+
+{% block body %}
+        <div class="card" style="padding:1.25rem">
+            <h1 style="margin-top:0">Ajouter un commentaire</h1>
+            <p style="color:var(--muted);margin-top:0.25rem">Laissez votre avis ou partagez des informations liées à l'événement sélectionné.</p>
+
+            {{ include('commentaire/_form.html.twig') }}
+
+            <div style="margin-top:0.75rem">
+                <a href="{{ path('app_commentaire_index') }}" class="btn btn-outline">Retour à la liste</a>
+            </div>
+        </div>
+{% endblock %}
