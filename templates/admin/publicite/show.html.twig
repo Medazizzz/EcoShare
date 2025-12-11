@@ -1,0 +1,75 @@
+{% extends 'admin/layout.html.twig' %}
+
+{% block title %}Fiche publicité{% endblock %}
+
+{% block admin_content %}
+<div class="page-title">
+    <div class="title_left">
+        <h3>Fiche publicité</h3>
+    </div>
+    <div class="title_right">
+        <div class="pull-right">
+            <a class="btn btn-default" href="{{ path('app_publicite_index') }}">
+                <i class="fa fa-arrow-left"></i> Retour à la liste
+            </a>
+            <a class="btn btn-success" href="{{ path('app_publicite_edit', {'id': publicite.id}) }}">
+                <i class="fa fa-pencil"></i> Modifier
+            </a>
+        </div>
+    </div>
+</div>
+<div class="clearfix"></div>
+
+<div class="row">
+    <div class="col-md-8 col-sm-12">
+        <div class="x_panel">
+            <div class="x_title">
+                <h2>Campagne publicitaire</h2>
+                <div class="clearfix"></div>
+            </div>
+            <div class="x_content">
+                <table class="table">
+                    <tbody>
+                    <tr>
+                        <th style="width:180px;">Image</th>
+                        <td>
+                            {% if publicite.image %}
+                                <img src="{{ publicite.image }}"
+                                     alt="{{ publicite.description ?? 'Campagne' }}"
+                                     style="max-height:120px; max-width:260px; object-fit:cover;">
+                            {% else %}
+                                <span class="text-muted small">Aucune image renseignée.</span>
+                            {% endif %}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>Description</th>
+                        <td>{{ publicite.description ?: '-' }}</td>
+                    </tr>
+                    <tr>
+                        <th>Lien externe</th>
+                        <td>
+                            {% if publicite.lien %}
+                                <a href="{{ publicite.lien }}" target="_blank">{{ publicite.lien }}</a>
+                            {% else %}
+                                <span class="text-muted small">Aucun lien renseigné.</span>
+                            {% endif %}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>Sponsor / partenaire lié</th>
+                        <td>
+                            {% if publicite.sponsorPartenaire %}
+                                {{ publicite.sponsorPartenaire.nom }}
+                            {% else %}
+                                <span class="text-muted small">Campagne générale EcoShare</span>
+                            {% endif %}
+                        </td>
+                    </tr>
+</tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

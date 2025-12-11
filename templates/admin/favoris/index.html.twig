@@ -1,0 +1,78 @@
+{% extends 'admin/layout.html.twig' %}
+
+{% block title %}Favoris{% endblock %}
+
+{% block admin_content %}
+<div class="page-title">
+  <div class="title_left">
+    <h3>Sponsors &amp; partenaires favoris</h3>
+  </div>
+</div>
+<div class="clearfix"></div>
+
+<div class="row">
+  <div class="col-md-12 col-sm-12 col-xs-12">
+    <div class="x_panel">
+      <div class="x_title">
+        <h2>Liste des sponsors / partenaires marqués comme favoris</h2>
+        <div class="clearfix"></div>
+      </div>
+      <div class="x_content">
+        {% if favorites is not empty %}
+          <table class="table table-striped">
+            <thead>
+            <tr>
+              <th>Nom</th>
+              <th>Type</th>
+              <th>Email</th>
+              <th>Lien</th>
+              <th style="width:180px;" class="text-right">Actions</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for sp in favorites %}
+              <tr>
+                <td class="align-middle">
+                  {{ sp.nom }}
+                </td>
+                <td class="align-middle">
+                  {{ sp.type|capitalize }}
+                </td>
+                <td class="align-middle">
+                  {% if sp.email %}
+                    <a href="mailto:{{ sp.email }}">{{ sp.email }}</a>
+                  {% else %}
+                    <span class="text-muted small">Non renseigné</span>
+                  {% endif %}
+                </td>
+                <td class="align-middle">
+                  {% if sp.lien %}
+                    <a href="{{ sp.lien }}" target="_blank">Voir</a>
+                  {% else %}
+                    <span class="text-muted small">Aucun lien</span>
+                  {% endif %}
+                </td>
+                <td class="align-middle text-right">
+                  <div class="btn-group" role="group">
+                    <a class="btn btn-primary btn-sm"
+                       href="{{ path('app_sponsor_partenaire_show', {'id': sp.id}) }}">
+                      <i class="fa fa-eye"></i> Consulter
+                    </a>
+                    <a class="btn btn-warning btn-sm"
+                       href="{{ path('app_sponsor_partenaire_edit', {'id': sp.id}) }}">
+                      <i class="fa fa-pencil"></i> Modifier
+                    </a>
+                  </div>
+                </td>
+              </tr>
+            {% endfor %}
+            </tbody>
+          </table>
+        {% else %}
+          <p class="text-muted">Aucun sponsor / partenaire n'est encore marqué comme favori.</p>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

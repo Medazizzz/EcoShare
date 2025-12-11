@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>{% block title %}{{ title|default('EcoShare') }}{% endblock %}</title>
+  {% block stylesheets %}
+    <link rel="stylesheet" href="/css/style.css">
+  {% endblock %}
+</head>
+<body data-theme="light">
+  <header class="top-header">
+    <div class="container header-content">
+      <a href="{{ path('home') }}" class="logo">
+        <span class="logo-mark">󰄛</span>
+        <span>EcoShare</span>
+      </a>
+      <div class="header-right">
+        <nav class="nav-links">
+          <a href="{{ path('home') }}" class="{% if app.request.attributes.get('_route') == 'home' %}active{% endif %}">Accueil</a>
+          <a href="#evenements">Événements</a>
+          <a href="#partenaires">Partenaires</a>
+          <a href="#publicites">Campagnes</a>
+          <a href="{{ path('dashboard') }}">Espace admin</a>
+        </nav>
+        <button id="themeToggle" class="theme-toggle" type="button" aria-label="Changer le thème">
+          <span class="theme-icon theme-icon-sun">☀️</span>
+          <span class="theme-icon theme-icon-moon">🌙</span>
+          <span class="theme-toggle-thumb"></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main class="main-shell">
+    <div class="container">
+      {% block body %}
+        {% if content is defined %}
+          {{ content|raw }}
+        {% endif %}
+      {% endblock %}
+    </div>
+  </main>
+
+  <footer>
+    © {{ "now"|date('Y') }} EcoShare — Partagez pour préserver
+  </footer>
+
+  {% block javascripts %}
+    <script src="/js/main.js" defer></script>
+  {% endblock %}
+</body>
+</html>

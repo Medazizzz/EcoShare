@@ -1,0 +1,100 @@
+{% extends 'admin/layout.html.twig' %}
+
+{% block title %}Fiche sponsor / partenaire{% endblock %}
+
+{% block admin_content %}
+<div class="page-title">
+    <div class="title_left">
+        <h3>Fiche sponsor / partenaire</h3>
+    </div>
+    <div class="title_right">
+        <div class="pull-right">
+            <a class="btn btn-default" href="{{ path('app_sponsor_partenaire_index') }}">
+                <i class="fa fa-arrow-left"></i> Retour à la liste
+            </a>
+            <a class="btn btn-success" href="{{ path('app_sponsor_partenaire_edit', {'id': sponsor.id}) }}">
+                <i class="fa fa-pencil"></i> Modifier
+            </a>
+        </div>
+    </div>
+</div>
+<div class="clearfix"></div>
+
+<div class="row">
+    <div class="col-md-7 col-sm-12">
+        <div class="x_panel">
+            <div class="x_title">
+                <h2>{{ sponsor.nom }}</h2>
+                <div class="clearfix"></div>
+            </div>
+            <div class="x_content">
+                <table class="table">
+                    <tbody>
+                    <tr>
+                        <th style="width:180px;">Type</th>
+                        <td>
+                            {% if sponsor.type == 'sponsor' %}
+                                <span class="badge bg-success">Sponsor</span>
+                            {% elseif sponsor.type == 'partenaire' %}
+                                <span class="badge bg-info">Partenaire</span>
+                            {% else %}
+                                <span class="badge bg-secondary">{{ sponsor.type }}</span>
+                            {% endif %}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>Logo</th>
+                        <td>
+                            {% if sponsor.logo %}
+                                <img src="{{ sponsor.logo }}" alt="{{ sponsor.nom }}" style="max-height:60px; max-width:200px; object-fit:contain;">
+                            {% else %}
+                                <span class="text-muted small">Aucun logo renseigné.</span>
+                            {% endif %}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>Description</th>
+                        <td>{{ sponsor.description ?: '-' }}</td>
+                    </tr>
+                    <tr>
+                        <th>Lien externe</th>
+                        <td>
+                            {% if sponsor.lien %}
+                                <a href="{{ sponsor.lien }}" target="_blank">{{ sponsor.lien }}</a>
+                            {% else %}
+                                <span class="text-muted small">Aucun lien renseigné.</span>
+                            {% endif %}
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-5 col-sm-12">
+        <div class="x_panel">
+            <div class="x_title">
+                <h2>Publicités associées</h2>
+                <div class="clearfix"></div>
+            </div>
+            <div class="x_content">
+                {% if sponsor.publicites|length > 0 %}
+                    <ul class="list-unstyled">
+                        {% for pub in sponsor.publicites %}
+                            <li class="mb-2">
+                                <strong>{{ pub.description ?: 'Publicité' }}</strong><br>
+                                {% if pub.image %}
+                                    <span class="small text-muted">{{ pub.image }}</span>
+                                {% endif %}
+                            </li>
+                        {% endfor %}
+                    </ul>
+                {% else %}
+                    <p class="text-muted">Aucune publicité associée pour le moment.</p>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

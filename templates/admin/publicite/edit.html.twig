@@ -1,0 +1,118 @@
+{% extends 'admin/layout.html.twig' %}
+
+{% block title %}Modifier publicité{% endblock %}
+
+{% block admin_content %}
+<div class="page-title">
+    <div class="title_left">
+        <h3>Modifier publicité</h3>
+    </div>
+    <div class="title_right">
+        <div class="pull-right">
+            <a class="btn btn-default" href="{{ path('app_publicite_index') }}">
+                <i class="fa fa-arrow-left"></i> Retour à la liste
+            </a>
+        </div>
+    </div>
+</div>
+<div class="clearfix"></div>
+
+<div class="row">
+    <div class="col-md-8 col-sm-12">
+        <div class="x_panel">
+            <div class="x_title">
+                <h2>Campagne n°{{ publicite.id }}</h2>
+                <div class="clearfix"></div>
+            </div>
+            <div class="x_content">
+                {{ form_start(form, {'attr': {'class': 'form-horizontal form-label-left'}, 'enctype': 'multipart/form-data'}) }}
+
+                <div class="form-group">
+                    {{ form_label(form.image, 'Image (URL ou chemin)', {'label_attr': {'class': 'control-label col-md-3 col-sm-3 col-xs-12'}}) }}
+                    <div class="col-md-9 col-sm-9 col-xs-12">
+                        {# Champ texte existant pour une URL ou un chemin relatif #}
+                        {{ form_widget(form.image, {'attr': {'class': 'form-control'}}) }}
+                        {{ form_errors(form.image) }}
+                        <p class="text-muted small m-t-xs">
+                            Bannières horizontales recommandées (ex: 600x300).
+                        </p>
+
+                        {# Nouveau bouton pour choisir une image depuis le PC #}
+                        <div class="m-t-sm">
+                            {{ form_widget(form.imageFile, {'attr': {'class': 'd-none'}}) }}
+                            <button type="button"
+                                    class="btn btn-success btn-sm"
+                                    onclick="document.getElementById('{{ form.imageFile.vars.id }}').click();">
+                                <i class="fa fa-upload"></i> Choisir une image depuis ce PC
+                            </button>
+                            <span id="imageFileName_{{ form.imageFile.vars.id }}" class="text-muted small" style="margin-left:8px;">
+                                Aucune image sélectionnée
+                            </span>
+                        </div>
+                    </div>
+                </div>
+
+                <script>
+                    document.addEventListener('DOMContentLoaded', function () {
+                        const input = document.getElementById('{{ form.imageFile.vars.id }}');
+                        const labelSpan = document.getElementById('imageFileName_{{ form.imageFile.vars.id }}');
+                        const imageTextInput = document.getElementById('{{ form.image.vars.id }}');
+                        if (input && labelSpan) {
+                            input.addEventListener('change', function () {
+                                if (this.files && this.files.length > 0) {
+                                    const fileName = this.files[0].name;
+                                    labelSpan.textContent = fileName;
+                                    if (imageTextInput) {
+                                        imageTextInput.value = fileName;
+                                    }
+                                } else {
+                                    labelSpan.textContent = 'Aucune image sélectionnée';
+                                }
+                            });
+                        }
+                    });
+                </script>
+
+
+                <div class="form-group">
+                    {{ form_label(form.description, 'Description', {'label_attr': {'class': 'control-label col-md-3 col-sm-3 col-xs-12'}}) }}
+                    <div class="col-md-9 col-sm-9 col-xs-12">
+                        {{ form_widget(form.description, {'attr': {'class': 'form-control', 'rows': 3}}) }}
+                        {{ form_errors(form.description) }}
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    {{ form_label(form.lien, 'Lien externe', {'label_attr': {'class': 'control-label col-md-3 col-sm-3 col-xs-12'}}) }}
+                    <div class="col-md-9 col-sm-9 col-xs-12">
+                        {{ form_widget(form.lien, {'attr': {'class': 'form-control'}}) }}
+                        {{ form_errors(form.lien) }}
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    {{ form_label(form.sponsorPartenaire, 'Sponsor / partenaire lié', {'label_attr': {'class': 'control-label col-md-3 col-sm-3 col-xs-12'}}) }}
+                    <div class="col-md-9 col-sm-9 col-xs-12">
+                        {{ form_widget(form.sponsorPartenaire, {'attr': {'class': 'form-control'}}) }}
+                        {{ form_errors(form.sponsorPartenaire) }}
+                    </div>
+                </div>
+
+                <div class="ln_solid"></div>
+                <div class="form-group">
+                    <div class="col-md-9 col-sm-9 col-xs-12 col-md-offset-3">
+                        <a class="btn btn-default" href="{{ path('app_publicite_index') }}">
+                            Annuler
+                        </a>
+                        <button type="submit" class="btn btn-success">
+                            <i class="fa fa-save"></i> Mettre à jour
+                        </button>
+                    </div>
+                </div>
+
+                {{ form_end(form) }}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

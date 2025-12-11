@@ -1,0 +1,56 @@
+{% extends 'admin/layout.html.twig' %}
+
+{% block title %}Dashboard - EcoShare Admin{% endblock %}
+
+{% block admin_content %}
+<div class="page-title">
+  <div class="title_left">
+    <h3>Dashboard</h3>
+  </div>
+</div>
+<div class="clearfix"></div>
+
+<div class="row top_tiles" style="margin-bottom: 20px;">
+  <div class="animated flipInY col-lg-4 col-md-4 col-sm-6 col-xs-12">
+    <div class="tile-stats">
+      <div class="icon"><i class="fa fa-handshake-o"></i></div>
+      <div class="count">{{ totalSponsors + totalPartenaires }}</div>
+      <h3>Sponsors &amp; partenaires</h3>
+      <p>Nombre total d'organisations actives.</p>
+    </div>
+  </div>
+  <div class="animated flipInY col-lg-4 col-md-4 col-sm-6 col-xs-12">
+    <div class="tile-stats">
+      <div class="icon"><i class="fa fa-bullhorn"></i></div>
+      <div class="count">{{ totalPublicites }}</div>
+      <h3>Campagnes publicitaires</h3>
+      <p>Nombre total de campagnes configurées.</p>
+    </div>
+  </div>
+  <div class="animated flipInY col-lg-4 col-md-4 col-sm-6 col-xs-12">
+    <div class="tile-stats">
+      <div class="icon"><i class="fa fa-bar-chart"></i></div>
+      <div class="count">{{ totalSponsors + totalPartenaires + totalPublicites }}</div>
+      <h3>Éléments EcoShare</h3>
+      <p>Vue rapide de l'activité globale.</p>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-12">
+    <div class="x_panel">
+      <div class="x_title">
+        <h2>Bienvenue sur l'espace administrateur EcoShare</h2>
+        <div class="clearfix"></div>
+      </div>
+      <div class="x_content">
+        <p>
+          Utilise le menu de gauche pour gérer les sponsors, partenaires et les campagnes publicitaires.
+          La section <strong>Statistiques</strong> te permet de visualiser les données clés sous forme de graphes.
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

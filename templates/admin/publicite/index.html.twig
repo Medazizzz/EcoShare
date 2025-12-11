@@ -1,0 +1,114 @@
+{% extends 'admin/layout.html.twig' %}
+
+{% block title %}Publicités{% endblock %}
+
+{% block admin_content %}
+<div class="page-title">
+    <div class="title_left">
+        <h3>Campagnes publicitaires</h3>
+    </div>
+    <div class="title_right">
+        <div class="pull-right">
+            <a class="btn btn-default" href="{{ path('admin_dashboard') }}">
+                <i class="fa fa-arrow-left"></i> Dashboard
+            </a>
+            <a class="btn btn-success" href="{{ path('app_publicite_new') }}">
+                <i class="fa fa-plus"></i> Ajouter
+            </a>
+        </div>
+    </div>
+</div>
+<div class="clearfix"></div>
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="x_panel">
+            <div class="x_title">
+                <h2>Liste des publicités</h2>
+                <ul class="nav navbar-right panel_toolbox">
+                    <li>
+                        <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                    </li>
+                </ul>
+                <div class="clearfix"></div>
+            </div>
+            <div class="x_content">
+                <table class="table table-striped table-hover">
+                    <thead>
+                    <tr>
+                        <th>Image</th>
+                        <th>Description</th>
+                        <th>Liée à</th>
+                        <th>Lien</th>
+                        <th class="text-right" style="width:220px;">Actions</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for publicite in publicites %}
+                        <tr>
+                            <td class="align-middle">
+                                {% if publicite.image %}
+                                    <img src="{{ publicite.image }}"
+                                         alt="{{ publicite.description ?? 'Campagne' }}"
+                                         style="max-height:60px; max-width:160px; object-fit:cover;">
+                                {% else %}
+                                    <span class="text-muted small">Aucune image</span>
+                                {% endif %}
+                            </td>
+                            <td class="align-middle">
+                                {% if publicite.description %}
+                                    <span class="small">{{ publicite.description }}</span>
+                                {% else %}
+                                    <span class="text-muted small">—</span>
+                                {% endif %}
+                            </td>
+                            <td class="align-middle">
+                                {% if publicite.sponsorPartenaire %}
+                                    {{ publicite.sponsorPartenaire.nom }}
+                                {% else %}
+                                    <span class="text-muted small">Campagne générale</span>
+                                {% endif %}
+                            </td>
+                            <td class="align-middle">
+                                {% if publicite.lien %}
+                                    <a href="{{ publicite.lien }}" target="_blank">Voir</a>
+                                {% else %}
+                                    <span class="text-muted small">Aucun lien</span>
+                                {% endif %}
+                            </td>
+                            <td class="align-middle text-right">
+                                <div class="btn-group" role="group">
+                                    <a class="btn btn-primary btn-sm"
+                                       href="{{ path('app_publicite_show', {'id': publicite.id}) }}">
+                                        <i class="fa fa-eye"></i> Consulter
+                                    </a>
+                                    <a class="btn btn-warning btn-sm"
+                                       href="{{ path('app_publicite_edit', {'id': publicite.id}) }}">
+                                        <i class="fa fa-pencil"></i> Modifier
+                                    </a>
+                                    <form method="post"
+                                          action="{{ path('app_publicite_delete', {'id': publicite.id}) }}"
+                                          style="display:inline"
+                                          onsubmit="return confirm('Supprimer cette publicité ?');">
+                                        <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ publicite.id) }}">
+                                        <button class="btn btn-danger btn-sm">
+                                            <i class="fa fa-trash"></i> Supprimer
+                                        </button>
+                                    </form>
+                                </div>
+                            </td>
+                        </tr>
+                    {% else %}
+                        <tr>
+                            <td colspan="5" class="text-center text-muted">
+                                Aucune publicité pour le moment.
+                            </td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

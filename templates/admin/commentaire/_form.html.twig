@@ -1,0 +1,48 @@
+{{ form_start(form, {'attr': {'class': 'auth-form'}}) }}
+
+{# global form errors #}
+{% if form_errors(form) is not empty %}
+    <div class="form-errors" style="margin-bottom:0.75rem;color:#b91c1c;font-weight:600;">
+        {{ form_errors(form) }}
+    </div>
+{% endif %}
+
+    <div class="form-row">
+        <div class="form-group">
+            {{ form_label(form.contenu) }}
+            <div class="input-wrapper">
+                {{ form_widget(form.contenu, {'attr': {'placeholder': 'Votre commentaire', 'class': ''}}) }}
+                <span class="input-line"></span>
+            </div>
+        </div>
+
+        <div class="form-group">
+            {{ form_label(form.dateCreation) }}
+            <div class="input-wrapper">
+                <span class="input-icon">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line></svg>
+                </span>
+                {{ form_widget(form.dateCreation, {'attr': {'class': 'input-date'}}) }}
+                <div class="form-error">{{ form_errors(form.dateCreation) }}</div>
+                <span class="input-line"></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group">
+        {{ form_label(form.evenement) }}
+        <div class="input-wrapper">
+            <span class="input-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
+            </span>
+            {{ form_widget(form.evenement, {'attr': {'class': 'select-input'}}) }}
+            <span class="input-line"></span>
+        </div>
+    </div>
+
+    <div style="margin-top:1rem;display:flex;gap:.5rem;align-items:center">
+        <button class="btn">{{ button_label|default('Enregistrer') }}</button>
+        <a href="{{ path('app_commentaire_index') }}" class="btn" style="background:transparent;color:var(--text-dark);padding:.6rem 1rem;box-shadow:none">Retour</a>
+    </div>
+
+{{ form_end(form) }}

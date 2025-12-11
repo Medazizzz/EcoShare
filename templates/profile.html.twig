@@ -1,0 +1,204 @@
+<?php
+$title = 'EcoShare — Profil';
+ob_start(); ?>
+<div class="layout">
+  <?php include __DIR__.'/sidebar.php'; ?>
+  <section class="main">
+    <div class="container">
+      <div class="profile-header">
+        <div class="profile-cover">
+          <div class="cover-overlay"></div>
+        </div>
+        <div class="profile-info">
+          <div class="profile-avatar-large">
+            <div class="avatar-image">JD</div>
+            <button class="avatar-edit-btn" title="Changer la photo">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
+                <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
+              </svg>
+            </button>
+          </div>
+          <div class="profile-details">
+            <h1>John Doe</h1>
+            <p class="profile-email">johndoe@gmail.com</p>
+            <div class="profile-badges">
+              <span class="badge eco-badge">🌱 Éco-utilisateur</span>
+              <span class="badge member-badge">Membre depuis 2024</span>
+            </div>
+          </div>
+          <button class="edit-profile-btn">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
+              <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
+            </svg>
+            Modifier le profil
+          </button>
+        </div>
+      </div>
+
+      <div class="profile-content">
+        <div class="profile-tabs">
+          <button class="tab-btn active" data-tab="overview">Vue d'ensemble</button>
+          <button class="tab-btn" data-tab="settings">Paramètres</button>
+          <button class="tab-btn" data-tab="activity">Activité</button>
+        </div>
+
+        <div class="tab-content active" id="overview">
+          <div class="grid-2">
+            <div class="card">
+              <h3>Informations personnelles</h3>
+              <div class="info-list">
+                <div class="info-item">
+                  <span class="info-label">Nom complet</span>
+                  <span class="info-value">John Doe</span>
+                </div>
+                <div class="info-item">
+                  <span class="info-label">Email</span>
+                  <span class="info-value">johndoe@gmail.com</span>
+                </div>
+                <div class="info-item">
+                  <span class="info-label">Téléphone</span>
+                  <span class="info-value">+33 6 12 34 56 78</span>
+                </div>
+                <div class="info-item">
+                  <span class="info-label">Ville</span>
+                  <span class="info-value">Paris, France</span>
+                </div>
+                <div class="info-item">
+                  <span class="info-label">Date d'inscription</span>
+                  <span class="info-value">15 Janvier 2024</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="card">
+              <h3>Statistiques</h3>
+              <div class="stats-grid">
+                <div class="stat-item">
+                  <div class="stat-value">12</div>
+                  <div class="stat-label">Objets partagés</div>
+                </div>
+                <div class="stat-item">
+                  <div class="stat-value">8</div>
+                  <div class="stat-label">Objets empruntés</div>
+                </div>
+                <div class="stat-item">
+                  <div class="stat-value">5</div>
+                  <div class="stat-label">Événements</div>
+                </div>
+                <div class="stat-item">
+                  <div class="stat-value">4.8</div>
+                  <div class="stat-label">Note moyenne</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="card" style="margin-top: 2rem;">
+            <h3>Objets récents</h3>
+            <div class="items-list">
+              <div class="item-card">
+                <div class="item-icon">🔧</div>
+                <div class="item-info">
+                  <div class="item-name">Perceuse électrique</div>
+                  <div class="item-status available">Disponible</div>
+                </div>
+                <button class="item-action">Voir</button>
+              </div>
+              <div class="item-card">
+                <div class="item-icon">🌳</div>
+                <div class="item-info">
+                  <div class="item-name">Tondeuse à gazon</div>
+                  <div class="item-status borrowed">Emprunté</div>
+                </div>
+                <button class="item-action">Voir</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="tab-content" id="settings">
+          <div class="card">
+            <h3>Paramètres du compte</h3>
+            <form class="settings-form">
+              <div class="form-group">
+                <label for="profile-firstName">Prénom</label>
+                <input type="text" id="profile-firstName" class="profile-input" value="John">
+              </div>
+              <div class="form-group">
+                <label for="profile-lastName">Nom</label>
+                <input type="text" id="profile-lastName" class="profile-input" value="Doe">
+              </div>
+              <div class="form-group">
+                <label for="profile-email">Email</label>
+                <input type="email" id="profile-email" class="profile-input" value="johndoe@gmail.com">
+              </div>
+              <div class="form-group">
+                <label for="profile-phone">Téléphone</label>
+                <input type="tel" id="profile-phone" class="profile-input" value="+33 6 12 34 56 78">
+              </div>
+              <div class="form-group">
+                <label for="profile-city">Ville</label>
+                <input type="text" id="profile-city" class="profile-input" value="Paris">
+              </div>
+              <button type="submit" class="save-btn">Enregistrer les modifications</button>
+            </form>
+          </div>
+
+          <div class="card" style="margin-top: 2rem;">
+            <h3>Changer le mot de passe</h3>
+            <form class="settings-form">
+              <div class="form-group">
+                <label for="current-password">Mot de passe actuel</label>
+                <input type="password" id="current-password" class="profile-input">
+              </div>
+              <div class="form-group">
+                <label for="new-password">Nouveau mot de passe</label>
+                <input type="password" id="new-password" class="profile-input">
+              </div>
+              <div class="form-group">
+                <label for="confirm-new-password">Confirmer le nouveau mot de passe</label>
+                <input type="password" id="confirm-new-password" class="profile-input">
+              </div>
+              <button type="submit" class="save-btn">Changer le mot de passe</button>
+            </form>
+          </div>
+        </div>
+
+        <div class="tab-content" id="activity">
+          <div class="card">
+            <h3>Historique d'activité</h3>
+            <div class="activity-timeline">
+              <div class="activity-item">
+                <div class="activity-icon">📦</div>
+                <div class="activity-content">
+                  <div class="activity-title">Objet partagé : Perceuse électrique</div>
+                  <div class="activity-date">Il y a 2 jours</div>
+                </div>
+              </div>
+              <div class="activity-item">
+                <div class="activity-icon">✅</div>
+                <div class="activity-content">
+                  <div class="activity-title">Réservation confirmée : Tondeuse</div>
+                  <div class="activity-date">Il y a 5 jours</div>
+                </div>
+              </div>
+              <div class="activity-item">
+                <div class="activity-icon">🌱</div>
+                <div class="activity-content">
+                  <div class="activity-title">Participation à l'événement : Nettoyage de plage</div>
+                  <div class="activity-date">Il y a 1 semaine</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+<?php $content = ob_get_clean(); 
+include __DIR__.'/base.html.twig.php';
+?>
+

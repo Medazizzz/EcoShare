@@ -1,0 +1,60 @@
+<?php
+$title = 'EcoShare — Membres';
+ob_start(); ?>
+<div class="layout">
+  <?php include __DIR__.'/sidebar.php'; ?>
+  <section class="main">
+    <div class="container">
+      <h2>Membres</h2>
+      <p class="subtitle">Gérez les membres de votre communauté</p>
+      
+      <div class="members-card" style="margin-top: 2rem;">
+        <div class="members-list">
+          <div class="member-item">
+            <div class="member-avatar">S</div>
+            <div class="member-info">
+              <div class="member-name">Scarlett</div>
+              <div class="member-role">Admin</div>
+            </div>
+            <button class="icon-btn" style="margin-left: auto;">⚙️</button>
+          </div>
+          <div class="member-item">
+            <div class="member-avatar">N</div>
+            <div class="member-info">
+              <div class="member-name">Nariya</div>
+              <div class="member-role">Full Access</div>
+            </div>
+            <button class="icon-btn" style="margin-left: auto;">⚙️</button>
+          </div>
+          <div class="member-item">
+            <div class="member-avatar">R</div>
+            <div class="member-info">
+              <div class="member-name">Riya</div>
+              <div class="member-role">Full Access</div>
+            </div>
+            <button class="icon-btn" style="margin-left: auto;">⚙️</button>
+          </div>
+          <div class="member-item">
+            <div class="member-avatar">D</div>
+            <div class="member-info">
+              <div class="member-name">Dad</div>
+              <div class="member-role">Full Access</div>
+            </div>
+            <button class="icon-btn" style="margin-left: auto;">⚙️</button>
+          </div>
+          <div class="member-item">
+            <div class="member-avatar">M</div>
+            <div class="member-info">
+              <div class="member-name">Mom</div>
+              <div class="member-role">Full Access</div>
+            </div>
+            <button class="icon-btn" style="margin-left: auto;">⚙️</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+<?php $content = ob_get_clean(); include __DIR__.'/base.html.twig.php';
+?>
+

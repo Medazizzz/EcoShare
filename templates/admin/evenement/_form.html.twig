@@ -1,0 +1,103 @@
+{% trans_default_domain 'messages' %}
+{{ form_start(form, {'attr': {'class': 'auth-form'}}) }}
+
+{# global form errors #}
+{% if form_errors(form) is not empty %}
+    <div class="form-errors" style="margin-bottom:0.75rem;color:#b91c1c;font-weight:600;">
+        {{ form_errors(form) }}
+    </div>
+{% endif %}
+
+    <div class="form-row">
+        <div class="form-group">
+            {{ form_label(form.titre) }}
+            <div class="input-wrapper">
+                {{ form_widget(form.titre, {'attr': {'placeholder': 'Titre', 'class': ''}}) }}
+                <span class="input-line"></span>
+            </div>
+        </div>
+
+        <div class="form-group">
+            {{ form_label(form.dateEvent) }}
+            <div class="input-wrapper">
+                <span class="input-icon">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line></svg>
+                </span>
+                {{ form_widget(form.dateEvent, {'attr': {'class': 'input-date'}}) }}
+                <div class="form-error">{{ form_errors(form.dateEvent) }}</div>
+                <span class="input-line"></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group">
+            {{ form_label(form.lieu) }}
+            <div class="input-wrapper">
+                {{ form_widget(form.lieu, {'attr': {'placeholder': 'Lieu', 'class': ''}}) }}
+                <span class="input-line"></span>
+            </div>
+        </div>
+
+        <div class="form-group">
+            {{ form_label(form.ville) }}
+            <div class="input-wrapper">
+                {{ form_widget(form.ville, {'attr': {'placeholder': 'Ville', 'class': ''}}) }}
+                <span class="input-line"></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group">
+            {{ form_label(form.type) }}
+            <div class="input-wrapper">
+                {{ form_widget(form.type, {'attr': {'class': ''}}) }}
+                <span class="input-line"></span>
+            </div>
+        </div>
+
+        <div class="form-group">
+            {{ form_label(form.imageFile) }}
+            <div class="input-wrapper">
+                {{ form_widget(form.imageFile, {'attr': {'class': 'input-file'}}) }}
+                <div class="form-error">{{ form_errors(form.imageFile) }}</div>
+                <span class="input-line"></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group">
+        {{ form_label(form.description) }}
+        <div class="input-wrapper">
+            {{ form_widget(form.description, {'attr': {'placeholder': 'Description', 'class': ''}}) }}
+            <span class="input-line"></span>
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group">
+            {{ form_label(form.organisateurNom) }}
+            <div class="input-wrapper">
+                {{ form_widget(form.organisateurNom, {'attr': {'placeholder': 'Nom de l\'organisateur', 'class': ''}}) }}
+                <span class="input-line"></span>
+            </div>
+        </div>
+
+        <div class="form-group">
+            {{ form_label(form.organisateurPrenom) }}
+            <div class="input-wrapper">
+                {{ form_widget(form.organisateurPrenom, {'attr': {'placeholder': 'Prénom de l\'organisateur', 'class': ''}}) }}
+                <span class="input-line"></span>
+            </div>
+        </div>
+    </div>
+
+    <div style="margin-top:1rem;display:flex;gap:.5rem;align-items:center">
+        <button class="btn">{{ button_label|default('Enregistrer') }}</button>
+        {% if show_back is not defined or show_back %}
+            <a href="{{ path('app_evenement_index') }}" class="btn" style="background:transparent;color:var(--text-dark);padding:.6rem 1rem;box-shadow:none">Retour</a>
+        {% endif %}
+    </div>
+
+{{ form_end(form) }}

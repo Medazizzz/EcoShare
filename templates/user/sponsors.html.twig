@@ -1,0 +1,358 @@
+{% extends 'user/base_user.html.twig' %}
+{% block title %}EcoShare — Sponsors & Partenaires{% endblock %}
+{% block body %}
+<nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav">
+    <div class="container">
+        <a class="navbar-brand fw-bold me-4" href="{{ path('home') }}"><i class="fa fa-leaf me-2"></i>EcoShare</a>
+        <button class="navbar-toggler text-uppercase font-weight-bold bg-primary text-white rounded"
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#navbarResponsive"
+                aria-controls="navbarResponsive"
+                aria-expanded="false"
+                aria-label="Toggle navigation">
+            Menu
+            <i class="fas fa-bars"></i>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item mx-1">
+                    <a class="nav-link py-3 px-2 px-lg-3 rounded" href="{{ path('home') }}#objects">Objets</a>
+                </li>
+                <li class="nav-item mx-1">
+                    <a class="nav-link py-3 px-2 px-lg-3 rounded" href="{{ path('home') }}#add-object">Proposer un objet</a>
+                </li>
+                <li class="nav-item mx-1">
+                    <a class="nav-link py-3 px-2 px-lg-3 rounded" href="{{ path('home') }}#reservations">Mes réservations</a>
+                </li>
+                <li class="nav-item mx-1">
+                    <a class="nav-link py-3 px-2 px-lg-3 rounded" href="{{ path('home') }}#feedback">Avis &amp; Réclamations</a>
+                </li>
+                <li class="nav-item mx-1">
+                    <a class="nav-link py-3 px-2 px-lg-3 rounded active" href="{{ path('app_sponsors_page') }}">Sponsors &amp; Partenaires</a>
+                </li>
+                <li class="nav-item mx-1">
+                    <a class="nav-link py-3 px-2 px-lg-3 rounded" href="#campagnes">Campagnes publicitaires</a>
+                </li>
+                <li class="nav-item mx-1">
+                    <a class="nav-link py-3 px-2 px-lg-3 rounded" href="#favoris-sponsors">
+                        <i class="fa fa-star me-1"></i>Voir mes favoris
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<header class="masthead text-white text-center" style="margin-bottom:0; background: linear-gradient(135deg,#145a32,#1f7a4d);">
+    <div class="container d-flex align-items-center flex-column">
+        <h1 class="masthead-heading text-uppercase mb-0">Sponsors &amp; partenaires</h1>
+        <p class="masthead-subheading font-weight-light mb-0">
+            Ils soutiennent EcoShare et rendent le partage plus responsable.
+        </p>
+    </div>
+</header>
+<section class="page-section" id="sponsors" style="background:#f4fbf7;">
+    <div class="container">
+        <h2 class="page-section-heading text-center text-uppercase text-secondary mb-4">
+            Nos soutiens
+        </h2>
+        <p class="text-center mt-3 mb-5">
+            Cette liste est générée à partir des données gérées par l&apos;administrateur dans l&apos;espace d&apos;administration.
+        </p>
+        <div class="row">
+            <div class="col-lg-6 mb-4">
+                <div class="card shadow-sm border-0 h-100">
+                    <div class="card-header text-white text-center text-uppercase fw-bold" style="background:#1f7a4d;">
+                        Sponsors
+                    </div>
+                    <div class="card-body" data-translate-container>
+                        <div class="row">
+                            {% set hasSponsors = false %}
+                            {% for sponsor in sponsors %}
+                                {% if sponsor.type == 'sponsor' %}
+                                    {% set hasSponsors = true %}
+                                    <div class="col-md-6 mb-4">
+                                        <div class="card h-100 border-0 shadow-sm text-center">
+                                            <div class="card-body" data-translate-container>
+                                                {% if sponsor.logo %}
+                                                    <img src="{{ sponsor.logo }}" alt="{{ sponsor.nom }}"
+                                                         class="img-fluid mb-3"
+                                                         style="max-height:80px; object-fit:contain;">
+                                                {% endif %}
+
+                                                <div class="d-flex justify-content-center align-items-center gap-2 mb-2">
+                                                    <form method="post"
+                                                          action="{{ path('app_sponsor_partenaire_toggle_favori', {'id': sponsor.id}) }}"
+                                                          class="m-0 p-0">
+                                                        <input type="hidden" name="_token" value="{{ csrf_token('favori' ~ sponsor.id) }}">
+                                                        <button type="submit"
+                                                                class="btn btn-link btn-sm p-0 favori-btn"
+                                                                title="{{ sponsor.favori ? 'Retirer des favoris' : 'Ajouter aux favoris' }}">
+                                                            {% if sponsor.favori %}
+                                                                <span class="favori-star">★</span>
+                                                            {% else %}
+                                                                <span class="favori-star-off">☆</span>
+                                                            {% endif %}
+                                                        </button>
+                                                    </form>
+                                                    <h5 class="card-title fw-bold mb-0">{{ sponsor.nom }}</h5>
+                                                </div>
+                                                {% if sponsor.description %}
+                                                    <p class="card-text small text-muted"
+                                                       data-translate="true">{{ sponsor.description }}</p>
+                                                    <div class="d-flex justify-content-center align-items-center gap-2 mt-2">
+                                                        <select class="form-select form-select-sm w-auto" data-translate-target>
+                                                            <option value="en">EN</option>
+                                                            <option value="fr">FR</option>
+                                                             <option value="es">ES</option>
+                                                             <option value="de">DE</option>
+                                                             <option value="it">IT</option>
+                                                             <option value="ar">AR</option>
+                                                        </select>
+                                                        <button type="button"
+                                                                class="btn btn-outline-success btn-sm"
+                                                                data-translate-button>
+                                                            🌐 Traduire
+                                                        </button>
+                                                    </div>
+                                                {% endif %}
+                                            </div>
+                                            <div class="card-footer bg-white border-0">
+                                                {% if sponsor.lien %}
+                                                    <a href="{{ sponsor.lien }}" class="btn btn-sm btn-success" target="_blank">
+                                                        Consulter
+                                                    </a>
+                                                {% else %}
+                                                    <span class="text-muted small">Aucun lien externe</span>
+                                                {% endif %}
+                                            </div>
+                                        </div>
+                                    </div>
+                                {% endif %}
+                            {% endfor %}
+                            {% if not hasSponsors %}
+                                <p class="text-center text-muted mb-0">Aucun sponsor enregistré pour le moment.</p>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6 mb-4">
+                <div class="card shadow-sm border-0 h-100">
+                    <div class="card-header text-white text-center text-uppercase fw-bold" style="background:#145a32;">
+                        Partenaires
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            {% set hasPartners = false %}
+                            {% for partenaire in sponsors %}
+                                {% if partenaire.type == 'partenaire' %}
+                                    {% set hasPartners = true %}
+                                    <div class="col-md-6 mb-4">
+                                        <div class="card h-100 border-0 shadow-sm text-center">
+                                            <div class="card-body" data-translate-container>
+                                                {% if partenaire.logo %}
+                                                    <img src="{{ partenaire.logo }}" alt="{{ partenaire.nom }}"
+                                                         class="img-fluid mb-3"
+                                                         style="max-height:80px; object-fit:contain;">
+                                                {% endif %}
+
+                                                <div class="d-flex justify-content-center align-items-center gap-2 mb-2">
+                                                    <form method="post"
+                                                          action="{{ path('app_sponsor_partenaire_toggle_favori', {'id': partenaire.id}) }}"
+                                                          class="m-0 p-0">
+                                                        <input type="hidden" name="_token" value="{{ csrf_token('favori' ~ partenaire.id) }}">
+                                                        <button type="submit"
+                                                                class="btn btn-link btn-sm p-0 favori-btn"
+                                                                title="{{ partenaire.favori ? 'Retirer des favoris' : 'Ajouter aux favoris' }}">
+                                                            {% if partenaire.favori %}
+                                                                <span class="favori-star">★</span>
+                                                            {% else %}
+                                                                <span class="favori-star-off">☆</span>
+                                                            {% endif %}
+                                                        </button>
+                                                    </form>
+                                                    <h5 class="card-title fw-bold mb-0">{{ partenaire.nom }}</h5>
+                                                </div>
+                                                {% if partenaire.description %}
+                                                    <p class="card-text small text-muted"
+                                                       data-translate="true">{{ partenaire.description }}</p>
+                                                    <div class="d-flex justify-content-center align-items-center gap-2 mt-2">
+                                                        <select class="form-select form-select-sm w-auto" data-translate-target>
+                                                            <option value="en">EN</option>
+                                                            <option value="fr">FR</option>
+                                                             <option value="es">ES</option>
+                                                             <option value="de">DE</option>
+                                                             <option value="it">IT</option>
+                                                             <option value="ar">AR</option>
+                                                        </select>
+                                                        <button type="button"
+                                                                class="btn btn-outline-success btn-sm"
+                                                                data-translate-button>
+                                                            🌐 Traduire
+                                                        </button>
+                                                    </div>
+                                                {% endif %}
+                                            </div>
+                                            <div class="card-footer bg-white border-0">
+                                                {% if partenaire.lien %}
+                                                    <a href="{{ partenaire.lien }}" class="btn btn-sm btn-success" target="_blank">
+                                                        Consulter
+                                                    </a>
+                                                {% else %}
+                                                    <span class="text-muted small">Aucun lien externe</span>
+                                                {% endif %}
+                                            </div>
+                                        </div>
+                                    </div>
+                                {% endif %}
+                            {% endfor %}
+                            {% if not hasPartners %}
+                                <p class="text-center text-muted mb-0">Aucun partenaire enregistré pour le moment.</p>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<section id="favoris-sponsors" class="page-section" style="background:#f8f9fa;">
+    <div class="container">
+        <div class="row mb-4">
+            <div class="col text-center">
+                <h2 class="text-uppercase" style="color:#145a32;">Vos sponsors &amp; partenaires favoris</h2>
+                <p class="text-muted mb-0">
+                    Cette liste regroupe les sponsors et partenaires que vous avez marqués avec l'étoile.
+                </p>
+            </div>
+        </div>
+        {% set favoriteSponsors = sponsors|filter(sp => sp.favori) %}
+        {% if favoriteSponsors is not empty %}
+            <div class="row">
+                {% for sp in favoriteSponsors %}
+                    <div class="col-md-4 mb-4">
+                        <div class="card h-100 border-0 shadow-sm text-center">
+                            <div class="card-body" data-translate-container>
+                                {% if sp.logo %}
+                                    <img src="{{ sp.logo }}" alt="{{ sp.nom }}"
+                                         class="img-fluid mb-3"
+                                         style="max-height:80px; object-fit:contain;">
+                                {% endif %}
+                                <h5 class="card-title fw-bold">
+                                    {{ sp.nom }}
+                                    <i class="fa fa-star ms-1" style="color:#f1c40f;"></i>
+                                </h5>
+                                <p class="mb-1">
+                                    <span class="badge" style="background:#e6f4ea; color:#145a32;">
+                                        {{ sp.type|capitalize }}
+                                    </span>
+                                </p>
+                                {% if sp.description %}
+                                    <p class="card-text small text-muted">{{ sp.description }}</p>
+                                {% endif %}
+                            </div>
+                            <div class="card-footer bg-white border-0">
+                                <div class="d-flex justify-content-center align-items-center gap-2">
+                                    {% if sp.lien %}
+                                        <a href="{{ sp.lien }}" class="btn btn-sm btn-outline-success" target="_blank">
+                                            Consulter
+                                        </a>
+                                    {% endif %}
+                                    <form method="post"
+                                          action="{{ path('app_sponsor_partenaire_toggle_favori', {'id': sp.id}) }}"
+                                          class="m-0 p-0">
+                                        <input type="hidden" name="_token" value="{{ csrf_token('favori' ~ sp.id) }}">
+                                        <button type="submit"
+                                                class="btn btn-link btn-sm p-0"
+                                                title="Retirer des favoris">
+                                            <span class="favori-star">★</span>
+                                        </button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        {% else %}
+            <p class="text-center text-muted mb-0">
+                Vous n'avez pas encore sélectionné de sponsor / partenaire favori.
+                Utilisez l'icône <i class="fa fa-star-o"></i> dans les listes ci-dessus pour en ajouter.
+            </p>
+        {% endif %}
+    </div>
+</section>
+<section class="page-section" id="campagnes">
+    <div class="container">
+        <h2 class="page-section-heading text-center text-uppercase text-secondary mb-4">
+            Campagnes publicitaires
+        </h2>
+        <p class="text-center mt-3 mb-5">
+            Ces campagnes sont configurées par l&apos;administrateur à partir des publicités EcoShare.
+        </p>
+        <div class="row">
+            {% for publicite in publicites %}
+                <div class="col-md-6 col-lg-4 mb-4">
+                    <div class="card h-100 border-0 shadow-sm">
+                        {% if publicite.image %}
+                            <img src="{{ publicite.image }}"
+                                 class="card-img-top"
+                                 alt="{{ publicite.description ?? 'Campagne EcoShare' }}">
+                        {% endif %}
+                        <div class="card-body" data-translate-container>
+                            <h5 class="card-title fw-bold">
+                                {% if publicite.sponsorPartenaire %}
+                                    Campagne avec {{ publicite.sponsorPartenaire.nom }}
+                                {% else %}
+                                    Campagne EcoShare
+                                {% endif %}
+                            </h5>
+                            
+                            {% if publicite.description %}
+                                <p class="card-text small text-muted"
+                                   data-translate="true">{{ publicite.description }}</p>
+                                <div class="d-flex justify-content-start align-items-center gap-2 mt-2">
+                                    <select class="form-select form-select-sm w-auto" data-translate-target>
+                                        <option value="en">EN</option>
+                                        <option value="fr">FR</option>
+                                        <option value="es">ES</option>
+                                        <option value="de">DE</option>
+                                        <option value="it">IT</option>
+                                        <option value="ar">AR</option>
+                                    </select>
+                                    <button type="button"
+                                            class="btn btn-outline-success btn-sm"
+                                            data-translate-button>
+                                        🌐 Traduire
+                                    </button>
+                                </div>
+                            {% endif %}
+                        </div>
+                        <div class="card-footer bg-white border-0 d-flex justify-content-between align-items-center">
+                            {% if publicite.lien %}
+                                <a href="{{ publicite.lien }}" class="btn btn-sm btn-outline-success" target="_blank">
+                                    En savoir plus
+                                </a>
+                            {% else %}
+                                <span class="text-muted small">Aucun lien externe</span>
+                            {% endif %}
+                            {% if publicite.sponsorPartenaire %}
+                                <span class="badge" style="background:#e6f4ea; color:#145a32;">
+                                    {{ publicite.sponsorPartenaire.type|capitalize }}
+                                </span>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            {% else %}
+                <p class="text-center text-muted">Aucune campagne publicitaire n'est encore publiée.</p>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+{% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+    <script src="{{ asset('js/translate.js') }}"></script>
+{% endblock %}

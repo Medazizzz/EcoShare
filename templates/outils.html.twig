@@ -1,0 +1,36 @@
+<?php
+$title = 'EcoShare — Outils partagés';
+ob_start(); ?>
+<div class="layout">
+  <?php include __DIR__.'/sidebar.php'; ?>
+  <section class="main">
+    <div class="container">
+      <h2>Outils partagés</h2>
+      <p class="subtitle">Empruntez ou prêtez des outils à la communauté</p>
+      
+      <div class="grid" style="margin-top: 2rem;">
+        <div class="card">
+          <h3>🔧 Perceuse</h3>
+          <p class="muted">Disponible</p>
+          <p>Perceuse électrique professionnelle, disponible pour emprunt.</p>
+          <a href="#" class="btn" style="margin-top: 1rem; display: inline-block;">Emprunter</a>
+        </div>
+        <div class="card">
+          <h3>🌳 Tondeuse</h3>
+          <p class="muted">Disponible</p>
+          <p>Tondeuse à gazon électrique, idéale pour petits jardins.</p>
+          <a href="#" class="btn" style="margin-top: 1rem; display: inline-block;">Emprunter</a>
+        </div>
+        <div class="card">
+          <h3>🪚 Scie circulaire</h3>
+          <p class="muted">Emprunté</p>
+          <p>Scie circulaire professionnelle, actuellement empruntée.</p>
+          <button disabled style="margin-top: 1rem; padding: 0.5rem 1rem; background: #e5e7eb; color: #9ca3af; border: none; border-radius: 0.5rem; cursor: not-allowed;">Indisponible</button>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+<?php $content = ob_get_clean(); include __DIR__.'/base.html.twig.php';
+?>
+

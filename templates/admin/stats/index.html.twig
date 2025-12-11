@@ -1,0 +1,81 @@
+{% extends 'admin/layout.html.twig' %}
+
+{% block title %}Statistiques EcoShare{% endblock %}
+
+{% block admin_content %}
+<div class="page-title">
+  <div class="title_left">
+    <h3>Statistiques EcoShare</h3>
+  </div>
+</div>
+<div class="clearfix"></div>
+
+<div class="row">
+  <div class="col-md-4 col-sm-4 col-xs-12">
+    <div class="x_panel tile fixed_height_200">
+      <div class="x_title">
+        <h2><i class="fa fa-star text-success"></i> Sponsors</h2>
+        <div class="clearfix"></div>
+      </div>
+      <div class="x_content">
+        <h3 class="text-success">{{ totalSponsors }}</h3>
+        <p class="text-muted">Sponsors enregistrés</p>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-4 col-sm-4 col-xs-12">
+    <div class="x_panel tile fixed_height_200">
+      <div class="x_title">
+        <h2><i class="fa fa-handshake-o text-info"></i> Partenaires</h2>
+        <div class="clearfix"></div>
+      </div>
+      <div class="x_content">
+        <h3 class="text-info">{{ totalPartenaires }}</h3>
+        <p class="text-muted">Partenaires enregistrés</p>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-4 col-sm-4 col-xs-12">
+    <div class="x_panel tile fixed_height_200">
+      <div class="x_title">
+        <h2><i class="fa fa-bullhorn text-primary"></i> Publicités</h2>
+        <div class="clearfix"></div>
+      </div>
+      <div class="x_content">
+        <h3 class="text-primary">{{ totalPublicites }}</h3>
+        <p class="text-muted">Campagnes enregistrées</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-7 col-sm-12 col-xs-12">
+    <div class="x_panel">
+      <div class="x_title">
+        <h2>Vue globale</h2>
+        <div class="clearfix"></div>
+      </div>
+      <div class="x_content">
+        {{ render_chart(summaryChart) }}
+      </div>
+    </div>
+  </div>
+
+  <div class="col-md-5 col-sm-12 col-xs-12">
+    <div class="x_panel">
+      <div class="x_title">
+        <h2>Publicités par sponsor / partenaire</h2>
+        <div class="clearfix"></div>
+      </div>
+      <div class="x_content">
+        {% if totalPublicites > 0 %}
+          {{ render_chart(campaignChart) }}
+        {% else %}
+          <p class="text-muted">Aucune campagne publicitaire n'est encore publiée.</p>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

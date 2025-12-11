@@ -1,0 +1,35 @@
+{# Front-office base layout using Freelancer assets under /public/front #}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>{% block title %}EcoShare — Plateforme éco-solidaire{% endblock %}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link href="{{ asset('front/css/styles.css') }}" rel="stylesheet" />
+    {% block stylesheets %}{% endblock %}
+  
+    <style>
+      /* EcoShare navbar tweaks */
+      #mainNav {
+        background: linear-gradient(135deg, #145a32, #1f7a4d);
+      }
+      #mainNav .navbar-brand {
+        font-weight: 700;
+        letter-spacing: 0.08em;
+      }
+      #mainNav .navbar-nav .nav-item {
+        margin-left: 0.5rem;
+        margin-right: 0.5rem;
+      }
+      #mainNav .nav-link {
+        font-size: 0.9rem;
+      }
+    </style>
+
+  </head>
+  <body id="page-top">
+    {% block body %}{% endblock %}
+    <script src="{{ asset('front/js/scripts.js') }}"></script>
+    {% block javascripts %}{% endblock %}
+  </body>
+</html>
