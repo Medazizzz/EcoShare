@@ -1,19 +1,19 @@
-# This file is the entry point to configure your own services.
-# Files in the packages/ subdirectory configure your dependencies.
+# config/services.yaml
 
-# Put parameters here that don't need to change on each machine where the app is deployed
-# https://symfony.com/doc/current/best_practices.html#use-parameters-for-application-configuration
 parameters:
+    huggingface_api_key: '%env(HUGGINGFACE_API_KEY)%'
+    huggingface_model: 'mistralai/Mistral-7B-Instruct-v0.2'
+
     uploads_directory: '%kernel.project_dir%/public/uploads/events'
+    app.mailer_from: '%env(MAILER_FROM)%'
+    app.notification_email: '%env(APP_NOTIFICATION_EMAIL)%'
+    app.publicite_notification_email: '%env(APP_PUBLICITE_NOTIFICATION_EMAIL)%'
 
 services:
-    # default configuration for services in *this* file
     _defaults:
-        autowire: true      # Automatically injects dependencies in your services.
-        autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.
+        autowire: true
+        autoconfigure: true
 
-    # makes classes in src/ available to be used as services
-    # this creates a service per class whose id is the fully-qualified class name
     App\:
         resource: '../src/'
         exclude:
@@ -21,10 +21,11 @@ services:
             - '../src/Entity/'
             - '../src/Kernel.php'
 
-    # add more service definitions when explicit configuration is needed
-    # please note that last definitions always *replace* previous ones
-
-
     App\Service\CloudinaryUploader:
         arguments:
             $cloudinaryUrl: '%env(CLOUDINARY_URL)%'
+
+    App\Service\AiDescriptionService:
+        arguments:
+            $huggingfaceApiKey: '%huggingface_api_key%'
+            $huggingfaceModel: '%huggingface_model%'

@@ -7,9 +7,6 @@ use App\Form\SponsorPartenaireType;
 use App\Repository\SponsorPartenaireRepository;
 use App\Service\CloudinaryUploader;
 use Doctrine\ORM\EntityManagerInterface;
-use Symfony\Component\Mailer\MailerInterface;
-use Symfony\Component\Mime\Email;
-use Symfony\Component\DependencyInjection\Attribute\Autowire;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -22,12 +19,12 @@ class SponsorPartenaireController extends AbstractController
     public function index(SponsorPartenaireRepository $repo): Response
     {
         return $this->render('admin/sponsor_partenaire/index.html.twig', [
-            'sponsors' => $repo->findAll(),
+            'sponsor_partenaires' => $repo->findAll(),
         ]);
     }
 
     #[Route('/new', name: 'app_sponsor_partenaire_new', methods: ['GET', 'POST'])]
-    public function new(Request $request, EntityManagerInterface $em, CloudinaryUploader $uploader, MailerInterface $mailer, #[Autowire('%env(APP_NOTIFICATION_EMAIL)%')] string $notificationEmail): Response
+    public function new(Request $request, EntityManagerInterface $em, CloudinaryUploader $uploader): Response
     {
         $sponsor = new SponsorPartenaire();
         $form = $this->createForm(SponsorPartenaireType::class, $sponsor);
@@ -42,30 +39,6 @@ class SponsorPartenaireController extends AbstractController
 
             $em->persist($sponsor);
             $em->flush();
-
-try {
-    $to = $sponsor->getEmail() ?: $notificationEmail;
-
-    if ($to) {
-        $email = (new Email())
-            ->from($notificationEmail ?: $to)
-            ->to($to)
-            ->subject(sprintf('Nouveau sponsor / partenaire : %s', $sponsor->getNom()))
-            ->text(sprintf(
-                "Bonjour,\n\nLe sponsor / partenaire \"%s\" vient d'être ajouté sur EcoShare en tant que %s.\n\nBienvenue à notre nouveau partenaire !\n\n— L'équipe EcoShare",
-                $sponsor->getNom(),
-                $sponsor->getType()
-            ));
-
-        if ($notificationEmail && $notificationEmail !== $to) {
-            $email->addBcc($notificationEmail);
-        }
-
-        $mailer->send($email);
-    }
-} catch (\Throwable $e) {
-    $this->addFlash('warning', 'Sponsor créé, mais l\'email de notification n\'a pas pu être envoyé.');
-}
 
             $this->addFlash('success', 'Sponsor / partenaire créé avec succès.');
 
@@ -111,7 +84,6 @@ try {
         ]);
     }
 
-
     #[Route('/{id}/favori', name: 'app_sponsor_partenaire_toggle_favori', methods: ['POST'])]
     public function toggleFavori(Request $request, SponsorPartenaire $sponsor, EntityManagerInterface $em): Response
     {
@@ -127,6 +99,7 @@ try {
             );
         }
 
+        // Redirige vers la page utilisateur qui liste les sponsors / partenaires
         return $this->redirectToRoute('app_sponsors_page');
     }
 

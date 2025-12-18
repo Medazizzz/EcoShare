@@ -10,7 +10,6 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\Validator\Constraints\Image;
 
 class SponsorPartenaireType extends AbstractType
 {
@@ -30,12 +29,7 @@ class SponsorPartenaireType extends AbstractType
                 'label' => 'Uploader un logo depuis votre PC',
                 'mapped' => false,
                 'required' => false,
-                'constraints' => [
-                    new Image([
-                        'maxSize' => '4M',
-                        'mimeTypesMessage' => 'Veuillez téléverser une image valide (JPG, PNG, GIF, SVG).',
-                    ]),
-                ],
+                'constraints' => [],
             ])
             ->add('description', TextType::class, [
                 'label' => 'Description',

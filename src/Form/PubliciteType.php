@@ -11,7 +11,6 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\Validator\Constraints\Image;
 
 class PubliciteType extends AbstractType
 {
@@ -28,11 +27,7 @@ class PubliciteType extends AbstractType
                 'label' => 'Uploader une image depuis votre PC',
                 'mapped' => false,
                 'required' => false,
-                'constraints' => [
-                    new Image([
-                        'maxSize' => '4M',
-                    ]),
-                ],
+                'constraints' => [],
             ])
             ->add('description', TextType::class, [
                 'label' => 'Description',
